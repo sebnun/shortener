@@ -1,18 +1,19 @@
 const http = require("http");
 const MongoClient = require('mongodb').MongoClient
 
-var db
 
-MongoClient.connect('mongodb://localhost:27017/test', (err, database) => {
-  if (err) return console.log(err)
-  db = database
-  console.log(".. connected to mongo?");
-  //console.log(db);
-})
+
+
 
 http.createServer(function(req, res) {
 
-    
+    MongoClient.connect('mongodb://localhost:27017/test', (err, database) => {
+  if (err) 
+    return console.log(err);
+  
+  console.log(".. connected to mongo?");
+  //console.log(db);
+});
 
 /*    if (req.url === "/" || req.url === "//") {
         res.writeHead(200, {"Content-Type": "text/html"});

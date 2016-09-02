@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sebnun/shortener/issues"
   },
-  "homepage": "https://github.com/sebnun/shortener#readme"
+  "homepage": "https://github.com/sebnun/shortener#readme",
+  "dependencies": {
+    "mongodb": "^2.2.9"
+  }
 }

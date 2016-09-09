@@ -6,7 +6,7 @@ function isUrl(s) {
 const http = require('http');
 const MongoClient = require('mongodb').MongoClient;
 const shortid = require('shortid');
-const url = require('http');
+const url = require('url');
 const dburl = 'mongodb://localhost:27017/mydb';
 
 http.createServer((req, res) => {

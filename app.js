@@ -16,7 +16,7 @@ http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end('<p>See <a href="https://github.com/sebnun/shortener">Shortener</a> for more info.</p>');
   } else if (/^\/\/new\/\S+/.test(req.url)) { // matches //new/jgjhg56
-    const userUrl = req.url.substring(6);
+    const userUrl = r.substring(6);
 
     if (isUrl(userUrl)) {
       MongoClient.connect(dburl, (err, db) => {
@@ -42,7 +42,7 @@ http.createServer((req, res) => {
       res.end(JSON.stringify(e));
     }
   } else if (r !== '//favicon.ico') {
-    const linkid = req.url.substring(2);
+    const linkid = r.substring(2);
 
     MongoClient.connect(dburl, (err, db) => {
       if (err) throw err;

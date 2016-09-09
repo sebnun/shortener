@@ -4,20 +4,18 @@ function isUrl(s) {
 }
 
 const http = require('http');
-const url = require('url');
 const MongoClient = require('mongodb').MongoClient;
 const shortid = require('shortid');
 
 const dburl = 'mongodb://localhost:27017/mydb';
 
 http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url);
-  console.log(parsedUrl.path);
-  if (parsedUrl.path === '/' || parsedUrl.path === '//') {
+  console.log(req.url);
+  if (req.url === '/' || req.url === '//') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end('<p>See <a href="https://github.com/sebnun/shortener">Shortener</a> for more info.</p>');
-  } else if (/^\/new\/\S+/.test(parsedUrl.path)) { // matches //new/jgjhg56
-    const userUrl = parsedUrl.path.substring(6);
+  } else if (/^\/\/new\/\S+/.test(req.url)) { // matches //new/jgjhg56
+    const userUrl = req.url.substring(6);
     console.log(userUrl);
     if (isUrl(userUrl)) {
       MongoClient.connect(dburl, (err, db) => {
@@ -42,8 +40,8 @@ http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/json' });
       res.end(JSON.stringify(e));
     }
-  } else if (parsedUrl.path !== '//favicon.ico') {
-    const linkid = parsedUrl.path.substring(2);
+  } else if (req.url !== '//favicon.ico') {
+    const linkid = req.url.substring(2);
     console.log(linkid);
     MongoClient.connect(dburl, (err, db) => {
       if (err) throw err;

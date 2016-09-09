@@ -10,7 +10,7 @@ const shortid = require('shortid');
 const dburl = 'mongodb://localhost:27017/mydb';
 
 http.createServer((req, res) => {
-  const r = req.url.replace(':/', '://');
+  const r = req.url.indexOf('://') === -1 ? req.url.replace(':/', '://') : req.url;
 
   if (r === '/' || r === '//') {
     res.writeHead(200, { 'Content-Type': 'text/html' });

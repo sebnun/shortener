@@ -12,8 +12,8 @@ const dburl = 'mongodb://localhost:27017/mydb';
 
 http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url);
-
-  res.end(parsedUrl);
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end(JSON.stringify(parsedUrl));
 /*
   if (parsedUrl.path === '/' || parsedUrl.path === '//') {
     res.writeHead(200, { 'Content-Type': 'text/html' });

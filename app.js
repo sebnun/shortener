@@ -6,20 +6,18 @@ function isUrl(s) {
 const http = require('http');
 const MongoClient = require('mongodb').MongoClient;
 const shortid = require('shortid');
-const url = require('url');
+
 const dburl = 'mongodb://localhost:27017/mydb';
 
 http.createServer((req, res) => {
-  console.log(req.url);
-  const purl = url.parse(req.url, true);
-  console.log(purl);
-  /*
-  if (req.url === '/' || req.url === '//') {
+  const r = req.url.replace(':/', '://');
+
+  if (r === '/' || r === '//') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end('<p>See <a href="https://github.com/sebnun/shortener">Shortener</a> for more info.</p>');
   } else if (/^\/\/new\/\S+/.test(req.url)) { // matches //new/jgjhg56
     const userUrl = req.url.substring(6);
-    console.log(userUrl);
+
     if (isUrl(userUrl)) {
       MongoClient.connect(dburl, (err, db) => {
         if (err) throw err;
@@ -43,9 +41,9 @@ http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/json' });
       res.end(JSON.stringify(e));
     }
-  } else if (req.url !== '//favicon.ico') {
+  } else if (r !== '//favicon.ico') {
     const linkid = req.url.substring(2);
-    console.log(linkid);
+
     MongoClient.connect(dburl, (err, db) => {
       if (err) throw err;
 
@@ -63,5 +61,5 @@ http.createServer((req, res) => {
         db.close();
       });
     });
-  }*/
+  }
 }).listen(8082);

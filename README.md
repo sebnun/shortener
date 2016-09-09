@@ -1,6 +1,6 @@
 # shortener
 
-URL Shortener Microservice using Node
+URL Shortener Microservice using Node and MongoDB
 
 ## User stories
 

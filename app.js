@@ -13,6 +13,8 @@ const dburl = 'mongodb://localhost:27017/mydb';
 http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url);
 
+  req.end(parsedUrl);
+/*
   if (parsedUrl.path === '/' || parsedUrl.path === '//') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end('<p>See <a href="https://github.com/sebnun/shortener">Shortener</a> for more info.</p>');
@@ -63,4 +65,5 @@ http.createServer((req, res) => {
       });
     });
   }
+  */
 }).listen(8082);

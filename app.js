@@ -11,7 +11,7 @@ const dburl = 'mongodb://localhost:27017/mydb';
 
 http.createServer((req, res) => {
   console.log(req.url);
-  const purl = url.parse(req.url);
+  const purl = url.parse(req.url, true);
   console.log(purl);
   /*
   if (req.url === '/' || req.url === '//') {
